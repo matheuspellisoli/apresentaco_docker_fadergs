@@ -1,0 +1,17 @@
+docker rm -f $(docker ps -a -q)
+
+docker run --name mongodb1 -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=main -e MONGO_INITDB_ROOT_PASSWORD=S3cret mongo
+
+docker run --name mongodb2 -p 27018:27017 -v /home/matheus/Documentos/dojo/cenario_3/mongo:/data/db  -e MONGO_INITDB_ROOT_USERNAME=main -e MONGO_INITDB_ROOT_PASSWORD=S3cret mongo
+
+use base
+
+db.itens.insertOne( {
+      "id":1,
+      "name":"Jaleco",
+      "description":"Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price":"R$ 999,99",
+      "available":true
+   })
+
+db.itens.find({id: 1})
